@@ -19,8 +19,15 @@ ax.set_ylim(0, 360)
 ax.set_xlim(0, 50)
 plt.legend()
 
+# encoder.reset_encoder(1,2048)
+# time.sleep(0.5)
+# encoder.reset_encoder(2,2048)
+# time.sleep(0.5)
+# encoder.reset_encoder(3,2048)
+# time.sleep(0.5)
+
 # Read angles in a loop and update plot
-for i in range(50):
+for i in range(5000):
     angle1 = encoder.read_angle(1)
     time.sleep(0.01)
 
@@ -47,7 +54,7 @@ for i in range(50):
     fig.canvas.draw()
     fig.canvas.flush_events()
     
-    time.sleep(0.5)
+    # time.sleep(0.5)
     # print('y1_data',y1_data)
     # print('y2_data',y2_data)
     # print('y3_data',y3_data)
