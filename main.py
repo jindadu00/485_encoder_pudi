@@ -41,9 +41,9 @@ ax.set_xlim(0, 50)
 plt.legend()
 
 ID=[1,2,3,4,5,6,7,8,9]
-# for i in ID:
-#     encoder.reset_encoder(i,2048)
-#     time.sleep(0.1)
+for i in ID:
+    encoder.reset_encoder(i,2048)
+    time.sleep(0.1)
 
 
 # Read angles in a loop and update plot

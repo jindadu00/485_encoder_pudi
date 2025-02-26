@@ -3,7 +3,7 @@ import struct
 import time
 
 class Encoder:
-    def __init__(self, port='COM3', baudrate=9600, timeout=1):
+    def __init__(self, port='COM4', baudrate=9600, timeout=1):
         self.ser = serial.Serial(port, baudrate, timeout=timeout)
         if not self.ser.is_open:
             self.ser.open()
@@ -28,7 +28,7 @@ class Encoder:
 
     def read_angle(self, encoder_id: int) -> float:
         response = self.send_request(encoder_id, 0x01, 0x01)  # 地址0x01，读取位置寄存器
-        print('response:',response)
+        # print('response:',response)
         if len(response) >= 7 and self.check_crc(response):
             # 解析返回数据，前两字节为功能码和字节数
             # print('response[3:5]:',response[3:5])
@@ -36,7 +36,7 @@ class Encoder:
             # print('angle_data:',angle_data)
 
             angle = angle_data / 4096 * 360  # 除以1000得到实际角度值
-            print('angle:',angle)
+            # print('angle:',angle)
 
             return angle
         return None
@@ -48,7 +48,7 @@ class Encoder:
 
     def reset_encoder(self, encoder_id: int, num: int):
         reset_command = struct.pack('>B B H H', encoder_id, 0x06, 0x002a,  num)
-        print('reset_command:',reset_command)
+        # print('reset_command:',reset_command)
         reset_command += self.crc16(reset_command)
         self.ser.write(reset_command)
         return self.ser.read(8)  # Response will be 8 bytes
